@@ -1,3 +1,7 @@
+import {
+	CHANGE_INPUT_VALUE
+} from './actionTypes';
+
 const defaultState = {
 	inputValue: '输入啊',
 	list: [],
@@ -5,7 +9,7 @@ const defaultState = {
 }
 //reducer 可以接受，但是不能修改state
 export default (state = defaultState, action) => {
-	if (action.type === 'change_input_value') {
+	if (action.type === CHANGE_INPUT_VALUE) {
 		const newState = JSON.parse(JSON.stringify(state));
 		newState.inputValue = action.value;
 		return newState;
