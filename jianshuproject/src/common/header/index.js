@@ -27,20 +27,51 @@
  } from 'react-transition-group';
 
  class Header extends Component {
+
  	getListArea() {
- 		if (this.props.focused) {
- 			return (<SearchInfo>
+ 		//结构赋值语法
+ 		const {
+ 			focused,
+ 			MouseIn,
+ 			list,
+ 			page,
+ 			totalPage,
+ 			hanleMouseEnter,
+ 			hanleMouseLeave,
+ 			handleChangePage
+ 		} = this.props;
+ 		const newList = list.toJS();
+ 		const pageList = [];
+
+ 		if (newList.length) {
+ 			for (let i = (page - 1) * 10; i < page * 10; i++) {
+ 				pageList.push(
+ 					<SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+ 				)
+ 			}
+ 		}
+ 		if (focused || !MouseIn) {
+ 			return (<SearchInfo 
+ 				onMouseEnter = {hanleMouseEnter}
+ 				onMouseLeave = {hanleMouseLeave}
+ 				>
 						<SearchInfoTitle>
 								tokyoHot
-								<SearchInfoSwitch>换一换</SearchInfoSwitch>
+								<SearchInfoSwitch 
+								onClick = {()=>handleChangePage(page,totalPage,this.spinIcon)}
+								>
+								 <i ref = {(icon)=>{this.spinIcon = icon}} className="iconfont">&#xe851;</i>
+								换一换
+								</SearchInfoSwitch>
 						</SearchInfoTitle>
-						<SearchInfoList>
-							{
-								this.props.list.map((item)=>{
-									return <SearchInfoItem key ={item}>{item}</SearchInfoItem>
-								}) 
-							}
+						<SearchInfoList >
+							{pageList}
+							{/*list.map((item)=>{
+								return <SearchInfoItem key= {item}>{item}</SearchInfoItem>
+							})
+							*/}
 						</SearchInfoList>
+
 					</SearchInfo>);
 
  		} else {
@@ -50,6 +81,13 @@
 
 
  	render() {
+ 		const {
+ 			focused,
+ 			handleInputFocus,
+ 			handleInputBlur,
+ 			list
+ 		} = this.props;
+
  		return (
  			<HeaderWrapper>
 				<Logo/> 
@@ -62,17 +100,17 @@
 					</NavItem>
 					<SearchWrapper>
 						<CSSTransition
-						 	in = {this.props.focused}
+						 	in = {focused}
 						 	timeout ={200}
 						 	classNames = "slide "
 						 >
 							<NavSearch
-								className={this.props.focused ? 'focused' : ''}
-								onFocus = {this.props.handleInputFocus}
-								onBlur ={this.props.handleInputBlur}
+								className={focused ? 'focused' : ''}
+								onFocus = {()=>handleInputFocus(list)}
+								onBlur ={handleInputBlur}
 							></NavSearch>
 						</CSSTransition>
-							<i className={this.props.focused ? 'focused iconfont' : 'iconfont'}>&#xe614;</i>
+							<i className={focused ? 'focused iconfont zoom' : 'iconfont zoom'}>&#xe614;</i>
 					{this. getListArea()}
 					</SearchWrapper>
 				</Nav>
@@ -95,10 +133,14 @@
 
  const mapDispatchToProps = (dispatch) => {
  	return {
- 		handleInputFocus() {
- 			dispatch(actionCreators.getList());
- 			dispatch(actionCreators.searchFocus());
+ 		handleInputFocus(list) {
+ 			// if (list.size > 0) {
+ 			// 	dispatch(actionCreators.getList());
+ 			// 	dispatch(actionCreators.searchFocus());
+ 			// }
  			// console.log("sdfsdf");
+ 			(list.size === 0) && dispatch(actionCreators.getList());
+ 			dispatch(actionCreators.searchFocus());
 
 
 
@@ -110,7 +152,23 @@
  			// };
  			// dispatch(action);
  			// console.log("1q123123");
+ 		},
+ 		hanleMouseEnter() {
+ 			dispatch(actionCreators.mouseEnter());
+ 			// console.log('error');
 
+ 		},
+ 		hanleMouseLeave() {
+ 			dispatch(actionCreators.mouseLeave());
+
+ 		},
+ 		handleChangePage(page, totalPage, spin) {
+ 			// spin.style.transform = 'rotate(360deg)';
+ 			if (page < totalPage) {
+ 				dispatch(actionCreators.changePage(page + 1));
+ 			} else {
+ 				dispatch(actionCreators.changePage(1));
+ 			}
 
  		}
  	}
@@ -120,7 +178,11 @@
  		//immutable-redux的2种写法
  		//
  		focused: state.getIn(['header', 'focused']),
- 		list: state.getIn(['header', 'list'])
+ 		list: state.getIn(['header', 'list']),
+ 		page: state.getIn(['header', 'page']),
+ 		mouseIn: state.getIn(['header', 'mouseIn']),
+ 		totalPage: state.getIn(['header', 'totalPage']),
+
 
  		// focused: state.get('header').get('focused')
 
