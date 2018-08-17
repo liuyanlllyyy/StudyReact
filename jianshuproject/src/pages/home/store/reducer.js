@@ -8,7 +8,7 @@ const defaultState = fromJS({
 	articleList: [],
 	recommendList: [],
 	articlePage: 1,
-	showScroll: false
+	showScroll: true
 });
 
 const changeHomeData = (state, action) => {
