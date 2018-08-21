@@ -20,6 +20,7 @@ class App extends Component {
             <Route path='/write' exact component={Write}></Route>
       			<Route path='/detail/:id' exact component={Detail}></Route>
       		</div>
+			  <div>appnotfound</div>
       	</BrowserRouter>
       </Provider>
     );
