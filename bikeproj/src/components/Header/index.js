@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
-import {Row,Col} from 'antd';
+import {Row,Col,Button} from 'antd';
 import './index.less';
 import Util from '../../utils/utils'
 export default class Header extends Component {
@@ -22,7 +22,7 @@ export default class Header extends Component {
                 <Row className= "header-top">
                     <Col span="24">
                         <span> 欢迎,{this.state.userName}</span>
-                        <a href="#">退出</a>
+                        <Button>退出是</Button>
                     </Col>
                 </Row>
                 <Row className="breadcrumb">
