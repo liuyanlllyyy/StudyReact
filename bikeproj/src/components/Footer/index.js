@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-class index extends PureComponent {
+class Footer extends PureComponent {
     render() {
         return (
             <div>
@@ -11,8 +11,4 @@ class index extends PureComponent {
     }
 }
 
-index.propTypes = {
-
-};
-
-export default index;
+export default Footer;

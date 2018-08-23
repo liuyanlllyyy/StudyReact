@@ -1,28 +1,24 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import {Row,Col} from 'antd';
-import Header from'./components/Header';
-import Footer from'./components/Footer';
-
+import React, { PureComponent } from "react";
+import { Row, Col } from "antd";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import NavLeft from "./components/NavLeft";
+import'./style/common.less'
 class admin extends PureComponent {
-    render() {
-        return (
-           <Row>
-               <Col span="3">
-               left
-               </Col>
-               <Col span="21">  
-                 <Header></Header>
-                 <span>sdf</span>
-                 <Footer></Footer>
-               </Col>
-           </Row>
-        );
-    }
+  render() {
+    return (
+      <Row className="container">
+        <Col span="4" className="nav-left">
+          <NavLeft />
+        </Col>
+        <Col span="20" className="main">
+          <Header />
+          <Row className="content">sdf</Row>
+          <Footer />
+        </Col>
+      </Row>
+    );
+  }
 }
-
-admin.propTypes = {
-
-};
 
 export default admin;
