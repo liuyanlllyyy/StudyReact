@@ -8,7 +8,7 @@ export default class Header extends Component {
     state={}
     componentWillMount(){
         this.setState({
-            userName:"大帅比刘衍 "
+            userName:"大帅比刘衍"
         })
         setInterval(()=>{
            let sysTime = Util.fromatDate(new Date().getTime());
@@ -51,8 +51,11 @@ export default class Header extends Component {
                     <Col span="4" className = "breadcrumb-title">首页</Col>
                     <Col span="20"className="weather">
                         <span className="date">{this.state.sysTime}</span>
+                        <span className="weather-img"> 
+                        <img src={this.state.dayPictureUrl} alt=""></img>
+                      
+                        </span>
                         <span className="weather-detail"> 
-                        {/* <img src={this.state.dayPictureUrl} alt=""></img> */}
                         {this.state.weather}
                         </span>
                     
