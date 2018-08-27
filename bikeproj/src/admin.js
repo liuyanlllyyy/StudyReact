@@ -7,6 +7,7 @@ import'./style/common.less'
 class admin extends PureComponent {
   render() {
     return (
+      //updagas 
       <Row className="container">
         <Col span="4" className="nav-left">
           <NavLeft />
