@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import NavLeft from "./components/NavLeft";
 import'./style/common.less'
+import Home from './pages/home'
 class admin extends PureComponent {
   render() {
     return (
@@ -14,7 +15,9 @@ class admin extends PureComponent {
         </Col>
         <Col span="20" className="main">
           <Header />
-          <Row className="content">sdf</Row>
+          <Row className="content">
+          <Home/>
+          </Row>
           <Footer />
         </Col>
       </Row>

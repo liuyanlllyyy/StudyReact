@@ -1,4 +1,6 @@
+@import './../../style/default.less';
 .header{
+    background-color: @colorM;
     .header-top{
         height: 60px;
         line-height: 60px;
@@ -15,6 +17,14 @@
         border-top: 1px solid #f9c708;
         .breadcrumb-title{
             text-align: center;
+            &:after{
+                position: absolute;
+                content: '';
+                left: 50px;
+                width: 10px;
+                height: 10px;
+                background-color: red;
+            }
         }
         .weather{
             text-align: right;
