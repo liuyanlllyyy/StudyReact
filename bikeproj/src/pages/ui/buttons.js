@@ -8,7 +8,7 @@ export default class Buttons extends React.Component {
         size:'default'
     }
 
-    handleCloseLoading=()=>{
+    handleCloseLoading = ()=>{
         this.setState({
             loading:false
         });
