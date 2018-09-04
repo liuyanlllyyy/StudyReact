@@ -15,6 +15,7 @@ export default class Buttons extends React.Component {
             [type]:true
         })
     }
+    handle
 
     handleConfirm = (type)=>{
         Modal[type]({
